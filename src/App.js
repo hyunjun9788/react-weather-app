@@ -1,11 +1,34 @@
 import styled from 'styled-components'
+import {useState} from "react";
+import axios from 'axios'
 function App() {
-  const url = `https://api.openweathermap.org/data/2.5/weather?q=Daejeon&appid=72eef875e6f055e59edb083deaea23e2
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}`
 `
+    const API_KEY ="72eef875e6f055e59edb083deaea23e2"
+
+   const [location,setLocation] = useState('')
+    const searchWeather = async (e) => {
+        if(e.key === 'Enter'){
+            try{
+                const data = await axios({
+                    method:'get',
+
+                })
+
+            }
+            catch(err){
+                alert(err)
+            }
+        }
+    }
   return (
     <AppWrap>
         <div className='appContentWrap'>
-            <input placeholder='도시를 입력하세요'/>
+            <input placeholder='도시를 입력하세요'
+            value={location}
+            onChange={(e)=>setLocation(e.target.value)}
+            type='text'
+            onKeyDown={searchWeather}/>
         </div>
     </AppWrap>
   );
